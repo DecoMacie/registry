@@ -6,23 +6,25 @@ interface PackageListItemProps {
 }
 
 export default function PackageListItem({ pack }: PackageListItemProps) {
-  const renderedKeywords = (pack.keywords || []).map((keyword) => {
+  const uniqueKeywords = [...new Set(pack.keywords)];
+  const renderedKeywords = (uniqueKeywords || []).map((keyword) => {
+    // console.log(keyword);
     return (
       <div
         key={keyword}
-        className="border py-0.5 px-1 text-xs bg-slate-200 rounded"
+        // className="border py-0.5 px-1 text-xs bg-slate-200 rounded"
       ></div>
     );
   });
 
   return (
-    <div className="border p-4 rounded flex justify-between items-center">
-      <div className="flex flex-col gap-2">
+    <div /*className="border p-4 rounded flex justify-between items-center"*/>
+      <div /*className="flex flex-col gap-2"*/>
         <Link to={`/packages/${pack.name}`} className="text-xl font-bold">
           {pack.name}
         </Link>
-        <p className="text-sm text-gray-500">{pack.description}</p>
-        <div className="flex gap-1">{renderedKeywords}</div>
+        <p /*className="text-sm text-gray-500"*/>{pack.description}</p>
+        <div /*className="flex gap-1"*/>{renderedKeywords}</div>
       </div>
       <div className="mr-6">
         <Link
